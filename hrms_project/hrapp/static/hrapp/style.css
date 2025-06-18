@@ -1,0 +1,13 @@
+body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table {
+    background: white;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+}
