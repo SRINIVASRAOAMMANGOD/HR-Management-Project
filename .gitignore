@@ -1,9 +1,31 @@
+# Bytecode
 __pycache__/
 *.py[cod]
+
+# SQLite DB
 db.sqlite3
-venv/
+
+# Env files
 .env
 *.env
-.DS_Store
+
+# Migrations (optional)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+
+# Static/media (optional - if not tracking)
 staticfiles/
 media/
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+env/
