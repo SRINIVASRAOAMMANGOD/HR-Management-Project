@@ -1,0 +1,15 @@
+{# upload_csv.html #}
+{% extends 'hrapp/base.html' %}
+{% block title %}Upload CSV{% endblock %}
+{% block content %}
+<h3>Upload Employee CSV File</h3>
+<p>File must contain: Name, Email, Phone, Department, Role, Salary</p>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Select File:</label>
+        <input type="file" name="employee_file" class="form-control-file" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+{% endblock %}

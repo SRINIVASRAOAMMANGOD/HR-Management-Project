@@ -1,0 +1,29 @@
+{# employee_list.html #}
+{% extends 'hrapp/base.html' %}
+{% block title %}Employee List{% endblock %}
+{% block content %}
+<h3>Employee List</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th><th>Email</th><th>Phone</th><th>Department</th><th>Role</th><th>Salary</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.phone }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.role }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>
+                <a href="{% url 'edit_employee' employee.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'delete_employee' employee.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
