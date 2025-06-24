@@ -2,6 +2,7 @@
 ```
 A web-based HR Management System built using Django.This platform allows HR users to manage employee data,
 update profiles, upload profile photos, andexport employee details in CSV or Excel formats.
+Hosted Link: https://hr-management-project.onrender.com wait for sometime until render is loading the app
 ```
 
 ## Features
