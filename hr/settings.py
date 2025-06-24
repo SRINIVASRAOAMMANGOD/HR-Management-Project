@@ -23,10 +23,10 @@ LOGIN_URL = '/'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-p#s0=+5lbp^!*wvf7)f*=)iy0x8@d2uzum)vr05@2q@)#0t%3o'
-#SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-dev-secret')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-dev-secret')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-#DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['hr-management-project.onrender.com']
 #ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
 
