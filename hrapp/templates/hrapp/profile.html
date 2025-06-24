@@ -12,6 +12,11 @@
 
         <!-- Display Current Data -->
         <div class="profile-summary bg-light p-3 rounded mb-4">
+            {% if profile.profile_image %}
+                <div class="mb-3">
+                      <img src="{{ profile.profile_image.url }}" width="100" height="100" class="rounded-circle border">
+                 </div>
+            {% endif %}
             <p><strong>Username:</strong> {{ user.username }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Phone:</strong> {{ hr.phone }}</p>
@@ -19,7 +24,8 @@
         </div>
 
         <!-- Profile Update Form -->
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
+
             {% csrf_token %}
             <div class="form-group">
                 <label for="name">Update Username:</label>
@@ -40,6 +46,14 @@
                 <label for="company">Update Company Name:</label>
                 <input type="text" class="form-control" id="company" name="company" value="{{ hr.company }}">
             </div>
+            <div class="form-group">
+                <label for="profile_image">Update Profile Photo:</label>
+                {% if profile.profile_image %}
+                       <img src="{{ profile.profile_image.url }}" width="100" height="100" class="mb-2 rounded"><br>
+                {% endif %}
+                <input type="file" class="form-control-file" name="profile_image" id="profile_image"><br>
+            
+</div>
 
             <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>

@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.login_view, name='login'),
@@ -15,4 +16,6 @@ urlpatterns = [
     path('employees/edit/<int:id>/', views.edit_employee, name='edit_employee'),
     path('employees/delete/<int:id>/', views.delete_employee, name='delete_employee'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
-]
+     path('export/employees/csv/', views.export_employees_csv, name='export_employees_csv'),
+    path('export/employees/excel/', views.export_employees_excel, name='export_employees_excel'),
+] 

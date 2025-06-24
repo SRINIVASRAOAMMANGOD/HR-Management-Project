@@ -5,6 +5,48 @@ from django.views.decorators.cache import never_cache
 from django.contrib.auth.models import User
 from .models import Employee, UserProfile, HRDetails
 import pandas as pd
+import csv
+from django.http import HttpResponse
+
+@login_required
+def export_employees_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="employees.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Name', 'Email', 'Phone', 'Department', 'Role', 'Salary'])
+
+    employees = Employee.objects.filter(hr_user=request.user)
+    for emp in employees:
+        writer.writerow([emp.name, emp.email, emp.phone, emp.department, emp.role, emp.salary])
+
+    return response
+
+
+@login_required
+def export_employees_excel(request):
+    employees = Employee.objects.filter(hr_user=request.user)
+    data = [
+        {
+            'Name': emp.name,
+            'Email': emp.email,
+            'Phone': emp.phone,
+            'Department': emp.department,
+            'Role': emp.role,
+            'Salary': emp.salary,
+        }
+        for emp in employees
+    ]
+
+    df = pd.DataFrame(data)
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename="employees.xlsx"'
+    df.to_excel(response, index=False)
+
+    return response
+
 
 
 @never_cache
@@ -15,18 +57,24 @@ def profile_view(request):
         hr = HRDetails.objects.get(user=user)
     except HRDetails.DoesNotExist:
         return redirect('logout')
+    profile, _ = UserProfile.objects.get_or_create(user=user)
 
     if request.method == 'POST':
         user.username = request.POST.get('username')
         user.email = request.POST.get('email')
         hr.phone = request.POST.get('phone')
         hr.company = request.POST.get('company')
+        if 'profile_image' in request.FILES:
+            profile.profile_image = request.FILES['profile_image']
+           
+
         user.save()
         hr.save()
-
+        profile.save()  # ✅ Save image update
     return render(request, 'hrapp/profile.html', {
         'user': user,
         'hr': hr,
+        'profile' : profile,
     })
 
 

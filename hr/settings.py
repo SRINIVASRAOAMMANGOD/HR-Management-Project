@@ -22,17 +22,21 @@ LOGIN_URL = '/'
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p#s0=+5lbp^!*wvf7)f*=)iy0x8@d2uzum)vr05@2q@)#0t%3o'
+#SECRET_KEY = 'django-insecure-p#s0=+5lbp^!*wvf7)f*=)iy0x8@d2uzum)vr05@2q@)#0t%3o'
 #SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-dev-secret')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = True
 #DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['hr-management-project.onrender.com']
 #ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 
-# Application definition
-
+# Application definition logged in using websitehosting0123@gmail.com
+CLOUDINARY_STORAGE = {
+  'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hrapp',
     'import_export',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 ALLOWED_HOSTS = ['*']
-
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,6 +133,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-#
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#below commented for deplaoyment
+
+# MEDIA_URL = '/media/'
+# #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = BASE_DIR / 'media'

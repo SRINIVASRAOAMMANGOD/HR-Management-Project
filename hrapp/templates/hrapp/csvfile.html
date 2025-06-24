@@ -2,7 +2,10 @@
 {% extends 'hrapp/base.html' %}
 {% block title %}Upload CSV{% endblock %}
 {% block content %}
-<h3>Upload Employee CSV File</h3>
+<h3>Upload Employee CSV File
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</h3>
 <p>File must contain: Name, Email, Phone, Department, Role, Salary</p>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}

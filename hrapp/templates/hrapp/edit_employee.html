@@ -2,7 +2,10 @@
 {% extends 'hrapp/base.html' %}
 {% block title %}Edit Employee{% endblock %}
 {% block content %}
-<h3>Edit Employee</h3>
+<h3>Edit Employee
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'employee_list' %}">← Back to Employee List</a>
+
+</h3>
   <form method="POST">
         {% csrf_token %}
         <div class="form-group">

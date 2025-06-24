@@ -2,13 +2,21 @@
 {% extends 'hrapp/base.html' %}
 {% block title %}Employee List{% endblock %}
 {% block content %}
-<h3>Employee List</h3>
+<h3>Employee List
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</h3>
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Name</th><th>Email</th><th>Phone</th><th>Department</th><th>Role</th><th>Salary</th><th>Actions</th>
         </tr>
     </thead>
+    <div class="mb-3">
+    <a href="{% url 'export_employees_csv' %}" class="btn btn-outline-success">Download CSV</a>
+    <a href="{% url 'export_employees_excel' %}" class="btn btn-outline-info">Download Excel</a>
+</div>
+
     <tbody>
         {% for employee in employees %}
         <tr>
@@ -20,7 +28,7 @@
             <td>{{ employee.salary }}</td>
             <td>
                 <a href="{% url 'edit_employee' employee.id %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="{% url 'delete_employee' employee.id %}" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'delete_employee' employee.id %}" class="btn btn-sm btn-danger m-1">Delete Permanent</a>
             </td>
         </tr>
         {% endfor %}

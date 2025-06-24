@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HRDetails, Employee
+from .models import HRDetails, Employee, UserProfile
 from import_export.admin import ExportMixin  # Requires: pip install django-import-export
 
 # HRDetails Admin
@@ -14,3 +14,8 @@ class EmployeeAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'department', 'role', 'salary', 'hr_user')
     search_fields = ('name', 'email', 'department', 'role')
     list_filter = ('department', 'role')
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone', 'company_name','profile_image')
+    
